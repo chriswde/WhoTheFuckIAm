@@ -185,7 +185,7 @@
           this.lobby_id = urlParams.get('lobby_id');
           const apiUrl = 'http://###server_url_port###/getlobbyinfo?lobby_id=' + this.lobby_id;
           this.fetchApi(apiUrl);
-          const updater = setInterval(() => {this.fetchApi(apiUrl);}, 3000);
+          const updater = setInterval(() => {this.fetchApi(apiUrl);}, 1000);
         }
       }).mount('#app')
     </script>

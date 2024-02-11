@@ -1,2 +1,2 @@
 server_url = name.domain
-server_port = 42069
+server_port = :42069

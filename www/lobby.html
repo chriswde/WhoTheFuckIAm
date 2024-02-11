@@ -81,7 +81,7 @@
         <ul style="list-style-type: none;">
           <li v-for="player in this.lobby_data['Players']">
             <div class="playercard">
-              <h4>{{ player.Icon}}</h4>
+              <h4>{{ player.Icon }}</h4>
               <span>{{ player.Nick }}</span>
               <hr>
               <div v-if="!(player.PlayerId == this.uid)">
@@ -92,7 +92,7 @@
                   <input type="submit" value="➡️" class="button">
                 </form>
                 <div v-else>
-                  <span>❓ {{player.NameToGuess}} ❓</span>
+                  <span>❓ {{ player.NameToGuess }} ❓</span>
                 </div>
               </div>
             </div>
@@ -178,6 +178,7 @@
               Object.assign(data, {[key]: val})
             }
             var request = 'http://###server_url_port###/setNameToGuess?name2guess=' + data['name2guess'] + '&lobby_id=' + data['lobby_id'] + '&player_id=' + data['player_id'];
+            fetch(request);
           }
         },
         mounted() {

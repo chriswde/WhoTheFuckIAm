@@ -33,7 +33,7 @@ namespace OhaseApi
       {
         Game.AddPlayerToLobby(lobby_id, player_id, nick);
         context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
-        return(readHtml("www/lobby.html", true, "###server_url_port###", (Config["server_url"]+":"+Config["server_port"])));
+        return(readHtml("www/lobby.html", true, "###server_url_port###", string.Concat(Config["server_url"],Config["server_port"])));
       });
 
       app.MapGet("/getlobbyinfo", (string lobby_id) =>

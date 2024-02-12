@@ -3,10 +3,14 @@ namespace OhaseApi.Game
   public class Logic
   {
     private Dictionary<string, Lobby> ActiveLobbies;
-    
+    private Thread CleanupLobbiesThread;
+
     public Logic()
     {
       this.ActiveLobbies = new Dictionary<string, Lobby>();
+      this.CleanupLobbiesThread = new Thread(new ThreadStart(this.CleanUpLobbies));
+      this.CleanupLobbiesThread.IsBackground = true;
+      this.CleanupLobbiesThread.Start();
     }
 
     public string NewLobby()
@@ -69,6 +73,24 @@ namespace OhaseApi.Game
         }
       }
       return false;
+    }
+
+    private void CleanUpLobbies()
+    {
+      while(true)
+      {
+        //run every 15 minutes
+        Thread.Sleep(1000*60*15);
+        foreach (var entry in this.ActiveLobbies)
+        {
+          var now = DateTimeOffset.Now;
+          var expire = entry.Value.CreationTime.AddHours(5);
+          if (expire < now)
+          {
+            this.ActiveLobbies.Remove(entry.Key);
+          }
+        }
+      }
     }
   }
 }
